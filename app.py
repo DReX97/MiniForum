@@ -26,6 +26,20 @@ def setup_database():
     """)
 
     conn.commit()
+
+    #check if the tables is empty
+    count = conn.execute("SELECT COUNT(*) FROM threads").fetchone()[0]
+
+    #Add sample gaming threads if there are none
+    if count == 0:
+        sample_threads = [
+            ("Best co-op games to play", "General"),
+            ("Any good RPGs recommendations?", "RPG"),
+            ("Tips for news PC gamers", "PC Gaming")
+        ]
+        conn.executemany("INSERT INTO threads (title, category) VALUES (?, ?)", sample_threads)
+
+    conn.commit()
     conn.close()    
 
 #define the homepage
