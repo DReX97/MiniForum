@@ -45,12 +45,17 @@ def setup_database():
 #define the homepage
 @app.route('/')
 def home():
+    search = request.args.get("search", "").strip()
     conn = get_connection()
-    #Retrieve all gaming threads from database
-    threads = conn.execute("SELECT * FROM threads").fetchall()
+
+    if search:
+        #search for threads that match the search term
+        threads = conn.execute("SELECT * FROM threads WHERE title LIKE ? OR category LIKE ?", ('%' + search + '%', '%' + search + '%')).fetchall()
+    else:
+        threads = conn.execute("SELECT * FROM threads").fetchall()
     conn.close()
     #send the threads to the HTML page
-    return render_template('index.html', threads=threads)
+    return render_template('index.html', threads=threads, search=search)
 
 if __name__ == '__main__':
     setup_database()

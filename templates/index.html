@@ -9,6 +9,13 @@
     <h1>MiniForum</h1>
     <p>Welcome to the gaming discussion forum!</p>
 
+    <form method="GET" action="/">
+        <input type="text" name="search"
+            placeholder="Search Discussions"
+            value="{{ search }}">
+        <button type="submit">Search</button>
+    </form>
+
     <h2>Gaming Discussions</h2>
 
     {% for thread in threads %}
