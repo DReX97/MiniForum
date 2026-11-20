@@ -23,5 +23,10 @@
         <p>Category: {{ thread["category"] }}</p>
         <hr>
     {% endfor %}
+
+    {% if not threads %}
+        <p>No discussions found.</p>
+    {% endif %}
+    
 </body>
 </html>

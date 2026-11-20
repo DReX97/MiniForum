@@ -33,6 +33,7 @@ class ForumTests(unittest.TestCase):
     def test_search_no_matches(self):
         response = self.client.get('/?search=Nonexistent')
         self.assertEqual(response.status_code, 200)
+        self.assertIn(b'No discussions found.', response.data)
         self.assertNotIn(b'Best co-op games to play', response.data)
         self.assertNotIn(b'Any good RPGs recommendations?', response.data)
 
