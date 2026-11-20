@@ -45,7 +45,12 @@ def setup_database():
 #define the homepage
 @app.route('/')
 def home():
-    return "Welcome to MiniForum!"
+    conn = get_connection()
+    #Retrieve all gaming threads from database
+    threads = conn.execute("SELECT * FROM threads").fetchall()
+    conn.close()
+    #send the threads to the HTML page
+    return render_template('index.html', threads=threads)
 
 if __name__ == '__main__':
     setup_database()

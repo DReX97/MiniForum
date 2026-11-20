@@ -1,0 +1,20 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MiniForum</title>
+</head>
+<body>
+    <h1>MiniForum</h1>
+    <p>Welcome to the gaming discussion forum!</p>
+
+    <h2>Gaming Discussions</h2>
+
+    {% for thread in threads %}
+        <h3>{{ thread["title"] }}</h3>
+        <p>Category: {{ thread["category"] }}</p>
+        <hr>
+    {% endfor %}
+</body>
+</html>
